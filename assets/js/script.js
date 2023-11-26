@@ -25,10 +25,13 @@ class Render {
             </div>
         `;
         if(this.redirect){
-            productCard.addEventListener('click', () => redirectToProductPage(product.id));
+            productCard.addEventListener('click', () => this.redirectToProductPage(product.id));
         }
         this.container.appendChild(productCard);
     });
+    }
+    redirectToProductPage(productId) {
+        window.location.href = `product.html?id=${productId}`;
     }
 }
 class Filter{
@@ -68,9 +71,7 @@ fetch('https://fakestoreapi.com/products')
     .catch(error => console.error('Error fetching products:', error));
 
 
-function redirectToProductPage(productId) {
-    window.location.href = `product.html?id=${productId}`;
-}
+
 
 
 

@@ -127,7 +127,7 @@ btnFilter2.addEventListener('click', ()=>{
 document.getElementById('sort').addEventListener('change',()=>{
     Dinamicsort('flexRadioDefault')
 })
-document.getElementById('btnSearch').addEventListener('click',()=>{
+document.getElementById('SearchInput').addEventListener('input',()=>{
     if(document.getElementById('SearchInput').value){
         psevdoData=Search(psevdoData, document.getElementById('SearchInput').value)
         searchData=psevdoData;

@@ -37,6 +37,9 @@
 div>input.form-control{
     width: 300px !important;
 }
+.search{
+    height: 40px;
+}
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;

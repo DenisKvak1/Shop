@@ -57,24 +57,27 @@ class Sort{
         return this.products.slice().sort((a, b) => a.price - b.price);   
     }
 }
-function Dinamicsort(containerRadio){
+function Dinamicsort(containerRadio, localData=psevdoData){
     switch([...document.getElementsByName(containerRadio)].find(radio => radio.checked).id){
         case 'defalutSort':
-            new Render(productList,psevdoData, true).renderProduct();
+            new Render(productList,localData, true).renderProduct();
             break;
         case 'byMaxSort':
-            let sort=new Sort(psevdoData).byMax()
+            let sort=new Sort(localData).byMax()
             new Render(productList,sort, true).renderProduct();
             break;
         case 'byMinSort':    
-            let sort2=new Sort(psevdoData).byMin()
+            let sort2=new Sort(localData).byMin()
             new Render(productList,sort2, true).renderProduct();
             break;
     }
 }
-
+function Search(products,prefix){
+    return products.filter(product => product.title.toLowerCase().startsWith(prefix.toLowerCase()));
+}
 let data;
 let psevdoData;
+let searchData;
 fetch('https://fakestoreapi.com/products')
     .then(response => response.json())
     .then(products => {
@@ -91,7 +94,13 @@ fetch('https://fakestoreapi.com/products')
 
 btnFilter.addEventListener('click', ()=>{
     if(document.getElementById('minPrice').value){
-        let filter=new Filter(data,document.getElementById('minPrice')).byMin()
+        let filter
+        if(!document.getElementById('SearchInput').value){
+            filter=new Filter(data,document.getElementById('minPrice')).byMin()
+        }
+        else{
+            filter=new Filter(searchData,document.getElementById('minPrice')).byMin()
+        }
         psevdoData=filter
         new Render(productList,filter, true).renderProduct();
         document.getElementById('minPrice').value=''
@@ -101,7 +110,13 @@ btnFilter.addEventListener('click', ()=>{
 })
 btnFilter2.addEventListener('click', ()=>{
     if(document.getElementById('maxPrice').value){
-        let filter=new Filter(data,document.getElementById('maxPrice')).byMax()
+        let filter
+        if(!document.getElementById('SearchInput').value){
+            filter=new Filter(data,document.getElementById('maxPrice')).byMax()
+        }
+        else{
+            filter=new Filter(searchData,document.getElementById('maxPrice')).byMax()
+        }
         psevdoData=filter;
         new Render(productList,filter, true).renderProduct();
         document.getElementById('maxPrice').value=''
@@ -111,4 +126,15 @@ btnFilter2.addEventListener('click', ()=>{
 })
 document.getElementById('sort').addEventListener('change',()=>{
     Dinamicsort('flexRadioDefault')
+})
+document.getElementById('btnSearch').addEventListener('click',()=>{
+    if(document.getElementById('SearchInput').value){
+        psevdoData=Search(psevdoData, document.getElementById('SearchInput').value)
+        searchData=psevdoData;
+        new Render(productList,psevdoData,true).renderProduct();
+        Dinamicsort('flexRadioDefault')
+    }
+    else{
+        new Render(productList,data,true).renderProduct();
+    }
 })

@@ -57,7 +57,21 @@ class Sort{
         return this.products.slice().sort((a, b) => a.price - b.price);   
     }
 }
-
+function Dinamicsort(containerRadio){
+    switch([...document.getElementsByName(containerRadio)].find(radio => radio.checked).id){
+        case 'defalutSort':
+            new Render(productList,psevdoData, true).renderProduct();
+            break;
+        case 'byMaxSort':
+            let sort=new Sort(psevdoData).byMax()
+            new Render(productList,sort, true).renderProduct();
+            break;
+        case 'byMinSort':    
+            let sort2=new Sort(psevdoData).byMin()
+            new Render(productList,sort2, true).renderProduct();
+            break;
+    }
+}
 
 let data;
 let psevdoData;
@@ -81,6 +95,8 @@ btnFilter.addEventListener('click', ()=>{
         psevdoData=filter
         new Render(productList,filter, true).renderProduct();
         document.getElementById('minPrice').value=''
+        Dinamicsort('flexRadioDefault')
+
     }
 })
 btnFilter2.addEventListener('click', ()=>{
@@ -89,20 +105,10 @@ btnFilter2.addEventListener('click', ()=>{
         psevdoData=filter;
         new Render(productList,filter, true).renderProduct();
         document.getElementById('maxPrice').value=''
+        Dinamicsort('flexRadioDefault')
+
     }
 })
-document.getElementById('sort').addEventListener('change',(event)=>{
-    switch(event.target.id){
-        case 'defalutSort':
-            new Render(productList,psevdoData, true).renderProduct();
-            break;
-        case 'byMaxSort':
-            let sort=new Sort(psevdoData).byMax()
-            new Render(productList,sort, true).renderProduct();
-            break;
-        case 'byMinSort':    
-            let sort2=new Sort(psevdoData).byMin()
-            new Render(productList,sort2, true).renderProduct();
-            break;
-    }
+document.getElementById('sort').addEventListener('change',()=>{
+    Dinamicsort('flexRadioDefault')
 })

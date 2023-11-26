@@ -58,6 +58,9 @@ class Sort{
     }
 }
 function Dinamicsort(containerRadio, localData=psevdoData){
+    if(document.getElementById('SearchInput').value){
+        localData=searchData;
+    }
     switch([...document.getElementsByName(containerRadio)].find(radio => radio.checked).id){
         case 'defalutSort':
             new Render(productList,localData, true).renderProduct();
@@ -129,9 +132,8 @@ document.getElementById('sort').addEventListener('change',()=>{
 })
 document.getElementById('SearchInput').addEventListener('input',()=>{
     if(document.getElementById('SearchInput').value){
-        psevdoData=Search(psevdoData, document.getElementById('SearchInput').value)
-        searchData=psevdoData;
-        new Render(productList,psevdoData,true).renderProduct();
+        searchData=Search(psevdoData, document.getElementById('SearchInput').value)
+        new Render(productList,searchData,true).renderProduct();
         Dinamicsort('flexRadioDefault')
     }
     else{

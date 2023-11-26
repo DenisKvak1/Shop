@@ -137,6 +137,6 @@ document.getElementById('SearchInput').addEventListener('input',()=>{
         Dinamicsort('flexRadioDefault')
     }
     else{
-        new Render(productList,data,true).renderProduct();
+        new Render(productList,psevdoData,true).renderProduct();
     }
 })

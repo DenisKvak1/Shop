@@ -1,0 +1,43 @@
+#cont__card{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap:20px
+}
+.img__wrap{
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.img__wrap img{
+    height: 100%;
+    width: auto;
+}
+
+
+.card-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* количество строк, которые вы хотите отобразить */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.card-text{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+#productList{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    column-gap: 50px;
+}
+div>input.form-control{
+    width: 300px !important;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
